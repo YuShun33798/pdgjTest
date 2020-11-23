@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pdgj.manager.mapper.ApiInfoMapper">
+    <select id="findByApiInfo" resultType="com.pdgj.manager.domain.ApiInfo">
+        SELECT * from sys_api_info t where 1=1
+        <if test="apiId != '' and apiId != null ">
+            AND t.api_id = apiId
+        </if>
+        <if test="nameEn != '' and nameEn != null ">
+            AND t.name_en = nameEn
+        </if>
+        <if test="nameCn != '' and nameCn != null ">
+            AND t.name_cn = nameCn
+        </if>
+        <if test="desc != '' and desc != null ">
+            AND t.desc = desc
+        </if>
+        <if test="status != '' and status != null ">
+            AND t.status = status
+        </if>
+        <if test="host != '' and host != null ">
+            AND t.host = host
+        </if>
+        <if test="reqType != '' and reqType != null ">
+            AND t.req_type = reqType
+        </if>
+        <if test="reqUrl != '' and reqUrl != null ">
+            AND t.req_url = reqUrl
+        </if>
+        <if test="project != '' and project != null ">
+            AND t.project = project
+        </if>
+        <if test="projectUrl != '' and projectUrl != null ">
+            AND t.project_url = projectUrl
+        </if>
+        <if test="createTime != '' and createTime != null ">
+            AND t.create_time = createTime
+        </if>
+        <if test="updateTime != '' and updateTime != null ">
+            AND t.update_time = updateTime
+        </if>
+    </select>
+
+    <insert id="insertApiInfo" parameterType="com.pdgj.manager.domain.ApiInfo">
+        insert into
+            sys_api_info (
+                api_id,
+                name_en,
+                name_cn,
+                desc,
+                status,
+                host,
+                req_type,
+                req_url,
+                project,
+                project_url,
+                create_time,
+                pdate_time
+                )
+            VALUES (
+                #{apiId},
+                #{nameEn},
+                #{nameCn},
+                #{desc},
+                #{host},
+                #{status},
+                #{reqType},
+                #{reqUrl},
+                #{project},
+                #{projectUrl},
+                str_to_date(#{createTime},'%Y-%m-%d %H:%i:%s'),
+                str_to_date(#{update_time},'%Y-%m-%d %H:%i:%s')
+                )
+    </insert>
+
+    <delete id="deleteApiInfoById" parameterType="java.lang.Integer">
+    	delete from sys_api_info where api_id = #{apiId}
+    </delete>
+
+    <update id="updateApiInfoById" parameterType="com.pdgj.manager.domain.ApiInfo">
+        update sys_api_info
+        <set>
+            <if test="nameEn != '' and nameEn != null ">
+                t.name_en = #{nameEn},
+            </if>
+            <if test="nameCn != '' and nameCn != null ">
+                t.name_cn = #{nameCn},
+            </if>
+            <if test="desc != '' and desc != null ">
+                t.desc = #{desc},
+            </if>
+            <if test="status != '' and status != null ">
+                t.status = #{status},
+            </if>
+            <if test="host != '' and host != null ">
+                t.host = #{host},
+            </if>
+            <if test="reqType != '' and reqType != null ">
+                t.req_type = #{reqType},
+            </if>
+            <if test="reqUrl != '' and reqUrl != null ">
+                t.req_url = #{reqUrl},
+            </if>
+            <if test="project != '' and project != null ">
+                t.project = #{project},
+            </if>
+            <if test="projectUrl != '' and projectUrl != null ">
+                t.project_url = #{projectUrl},
+            </if>
+            <if test="createTime != '' and createTime != null ">
+                t.create_time = str_to_date(#{createTime},'%Y-%m-%d %H:%i:%s'),
+            </if>
+            <if test="updateTime != '' and updateTime != null ">
+                t.update_time = str_to_date(#{updateTime},'%Y-%m-%d %H:%i:%s'),
+            </if>
+        </set>
+        where api_id = #{apiId}
+    </update>
+</mapper>
