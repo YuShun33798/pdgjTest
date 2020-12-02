@@ -20,6 +20,8 @@ public enum ResultCode {
     TIME_OUT(408, "请求超时"),
 
     SERVER_ERROR(500, "服务器内部错误"),
+    ERROR_CODE_ONE(1001, "用户权限不足，无法调用此接口"),
+    ERROR_CODE_TWO(1002, "服务器内部错误2"),
 ;
     private int code;
     private String msg;
