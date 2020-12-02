@@ -46,7 +46,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 		System.out.println(userName);
 		System.out.println(password);
 		//service层交互获取数据
-		returnJson(response);
+//		returnJson(response);
 
 		return true;
 	}

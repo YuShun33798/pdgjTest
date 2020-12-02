@@ -43,7 +43,7 @@ public class JwtUtils {
         UserDetail userDetail;
         try {
             final Claims claims = getClaimsFromToken(token);
-            long userId = getUserIdFromToken(token);
+            String userId = getUserIdFromToken(token);
             String username = claims.getSubject();
             String roleName = claims.get(CLAIM_KEY_AUTHORITIES).toString();
             Role role = Role.builder().name(roleName).build();
@@ -54,13 +54,13 @@ public class JwtUtils {
         return userDetail;
     }
 
-    public long getUserIdFromToken(String token) {
-        long userId;
+    public String getUserIdFromToken(String token) {
+        String userId;
         try {
             final Claims claims = getClaimsFromToken(token);
-            userId = Long.parseLong(String.valueOf(claims.get(CLAIM_KEY_USER_ID)));
+            userId = String.valueOf(claims.get(CLAIM_KEY_USER_ID));
         } catch (Exception e) {
-            userId = 0;
+            userId = "0";
         }
         return userId;
     }
@@ -124,10 +124,10 @@ public class JwtUtils {
 
     public Boolean validateToken(String token, UserDetails userDetails) {
         UserDetail userDetail = (UserDetail) userDetails;
-        final long userId = getUserIdFromToken(token);
+        final String userId = getUserIdFromToken(token);
         final String username = getUsernameFromToken(token);
 //        final Date created = getCreatedDateFromToken(token);
-        return (userId == userDetail.getId()
+        return (userId.equals(userDetail.getId())
                 && username.equals(userDetail.getUsername())
                 && !isTokenExpired(token)
 //                && !isCreatedBeforeLastPasswordReset(created, userDetail.getLastPasswordResetDate())

@@ -30,7 +30,7 @@ public interface AuthMapper {
      * @param roleId
      * @return
      */
-    int insertRole(@Param("userId") long userId, @Param("roleId") long roleId);
+    int insertRole(@Param("userId") String userId, @Param("roleId") long roleId);
 
     /**
      * 根据角色id查找角色
@@ -44,5 +44,5 @@ public interface AuthMapper {
      * @param userId
      * @return
      */
-    Role findRoleByUserId(@Param("userId") long userId);
+    Role findRoleByUserId(@Param("userId") String userId);
 }
