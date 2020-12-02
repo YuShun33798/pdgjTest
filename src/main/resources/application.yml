@@ -3,6 +3,12 @@ server:
   servlet:
     context-path: /pdgjTest
 
+#读取log配置文件
+logging:
+  config: classpath:logback-boot.xml
+#日志路径
+  log_root: "E:/njdk/pdfjTest/"
+
 spring :
   datasource :
     url : jdbc:mysql://180.169.154.251:23306/pggjtest?useUnicode=true&amp;characterEncoding=UTF-8&allowMultiQueries=true&useAffectedRows=true&useSSL=false
