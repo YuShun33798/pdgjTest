@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pdgj.manager.mapper.interfaceManage.InterfaceMapper">
+    <!--获取接口分页列表-->
+    <select id="queryIntfcPageList" resultType="com.pdgj.manager.domain.interfaceInfo.InterfaceInfoEntity">
+        SELECT f_id id,f_name name FROM sys_api_intfc_info t where 1=1
+    </select>
+
+    <!--新增接口信息-->
+    <insert id="saveIntfc" parameterType="com.pdgj.manager.domain.interfaceInfo.InterfaceInfoEntity">
+        insert into
+            sys_api_intfc_info (
+                f_id,
+                f_name,
+                f_create_time
+                )
+            VALUES (
+                #{id},
+                #{name},
+                SYSDATE()
+                )
+    </insert>
+
+    <!--删除接口信息-->
+    <delete id="deleteIntfc" parameterType="com.pdgj.manager.domain.interfaceInfo.InterfaceInfoEntity">
+       delete from sys_api_intfc_info where f_id = #{id}
+    </delete>
+
+    <!--修改接口信息-->
+    <update id="updateIntfc" parameterType="com.pdgj.manager.domain.interfaceInfo.InterfaceInfoEntity">
+        update sys_api_intfc_info
+        <set>
+            <if test="name != '' and name != null ">
+                f_name = #{name}
+            </if>
+        </set>
+        where f_id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pdgj.manager.mapper.userManage.UserMapper">
+    <!--获取接口分页列表-->
+    <select id="queryUserPageList" resultType="com.pdgj.manager.domain.userEntity.UserEntity">
+        SELECT id, name FROM sys_user t where 1=1
+    </select>
+
+    <!--新增接口信息-->
+    <insert id="saveUser" parameterType="com.pdgj.manager.domain.userEntity.UserEntity">
+        insert into
+            sys_user (
+                id,
+                name
+                )
+            VALUES (
+                #{id},
+                #{name}
+                )
+    </insert>
+
+    <!--删除接口信息-->
+    <delete id="deleteUser" parameterType="com.pdgj.manager.domain.userEntity.UserEntity">
+       delete from sys_user where id = #{id}
+    </delete>
+
+    <!--修改接口信息-->
+    <update id="updateUser" parameterType="com.pdgj.manager.domain.userEntity.UserEntity">
+        update sys_user
+        <set>
+            <if test="name != '' and name != null ">
+                name = #{name}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserIntfc" parameterType="com.pdgj.manager.domain.userEntity.UserIntfcEntity">
+        delete from sys_api_user_intfc_into where f_user_id = #{userId}
+    </delete>
+
+    <insert id="saveUserIntfc" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" separator=";" open="begin" close=";end;">
+            insert into sys_api_user_intfc_into
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="item.id != null and item.id != ''">
+                    f_id,
+                </if>
+                <if test="item.userId != null and item.userId != ''">
+                    f_user_id,
+                </if>
+                <if test="item.intfcId != null and item.intfcId != ''">
+                    f_intfc_id,
+                </if>
+            </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="item.id != null and item.id != ''">
+                    #{item.id},
+                </if>
+                <if test="item.userId != null and item.userId != ''">
+                    #{item.userId},
+                </if>
+                <if test="item.intfcId != null and item.intfcId != ''">
+                    #{item.intfcId},
+                </if>
+            </trim>
+        </foreach>
+    </insert>
+</mapper>
