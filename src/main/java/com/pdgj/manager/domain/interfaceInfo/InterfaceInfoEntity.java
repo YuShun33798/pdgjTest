@@ -1,6 +1,8 @@
 package com.pdgj.manager.domain.interfaceInfo;
 
 import com.pdgj.manager.controller.basic.BasicEntity;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -10,31 +12,32 @@ import lombok.Data;
  * @Description
  **/
 @Data
+@ApiModel(value = "接口实体Bean")
 public class InterfaceInfoEntity extends BasicEntity {
-    /*主键*/
+    @ApiModelProperty(value = "主键")
     private String id;
-    /*接口名称*/
+    @ApiModelProperty(value = "接口名称")
     private String name;
-    /*接口标识*/
+    @ApiModelProperty(value = "接口标识")
     private String flag;
-    /*接口描述*/
+    @ApiModelProperty(value = "接口描述")
     private String description;
-    /*状态*/
+    @ApiModelProperty(value = "状态")
     private String status;
-    /*项目头*/
+    @ApiModelProperty(value = "项目头")
     private String pjtHead;
-    /*Url地址*/
+    @ApiModelProperty(value = "Url地址")
     private String intfcUrl;
-    /*请求类型*/
+    @ApiModelProperty(value = "请求类型")
     private String type;
-    /*创建人*/
+    @ApiModelProperty(value = "创建人")
     private String createBy;
-    /*创建时间*/
+    @ApiModelProperty(value = "创建时间")
     private String createTime;
-    /*修改人*/
+    @ApiModelProperty(value = "修改人")
     private String updateBy;
-    /*修改时间*/
+    @ApiModelProperty(value = "修改时间")
     private String updateTime;
-    /*备注*/
+    @ApiModelProperty(value = "备注")
     private String remark;
 }

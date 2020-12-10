@@ -9,6 +9,7 @@ import com.pdgj.manager.service.interfaceManage.InterfaceService;
 import com.pdgj.manager.service.userManage.UserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +34,7 @@ public class UserManageController {
      * @Date 16:00 2020/12/1
      **/
     @RequestMapping(value = "/queryUserPageList", produces = "application/json")
+    @CrossOrigin
     public ResultJson queryUserPageList(@RequestBody UserEntity userEntity) {
         PageInfo<UserEntity> pageInfo = userService.queryUserPageList(userEntity);
         return ResultJson.ok(pageInfo);

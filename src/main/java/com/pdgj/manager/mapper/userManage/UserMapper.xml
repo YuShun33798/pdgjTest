@@ -6,6 +6,9 @@
     <!--获取接口分页列表-->
     <select id="queryUserPageList" resultType="com.pdgj.manager.domain.userEntity.UserEntity">
         SELECT id, name FROM sys_user t where 1=1
+        <if test="name != '' and name != null ">
+            and t.name like concat('%',#{name},'%')
+        </if>
     </select>
 
     <!--新增接口信息-->
@@ -38,33 +41,22 @@
     </update>
 
     <delete id="deleteUserIntfc" parameterType="com.pdgj.manager.domain.userEntity.UserIntfcEntity">
-        delete from sys_api_user_intfc_into where f_user_id = #{userId}
+        delete from sys_api_user_intfc_info where f_user_id = #{userId}
     </delete>
 
     <insert id="saveUserIntfc" parameterType="java.util.List">
-        <foreach collection="list" item="item" index="index" separator=";" open="begin" close=";end;">
-            insert into sys_api_user_intfc_into
+        insert into sys_api_user_intfc_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            f_id,
+            f_user_id,
+            f_intfc_id
+        </trim>
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
             <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="item.id != null and item.id != ''">
-                    f_id,
-                </if>
-                <if test="item.userId != null and item.userId != ''">
-                    f_user_id,
-                </if>
-                <if test="item.intfcId != null and item.intfcId != ''">
-                    f_intfc_id,
-                </if>
-            </trim>
-            <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="item.id != null and item.id != ''">
-                    #{item.id},
-                </if>
-                <if test="item.userId != null and item.userId != ''">
-                    #{item.userId},
-                </if>
-                <if test="item.intfcId != null and item.intfcId != ''">
-                    #{item.intfcId},
-                </if>
+                #{item.id},
+                #{item.userId},
+                #{item.intfcId}
             </trim>
         </foreach>
     </insert>

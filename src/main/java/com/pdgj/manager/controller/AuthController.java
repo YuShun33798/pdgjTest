@@ -40,6 +40,7 @@ public class AuthController {
 
     @PostMapping(value = "/login")
     @ApiOperation(value = "登陆", notes = "登陆成功返回token,登陆之前请先注册账号")
+    @CrossOrigin
     public ResultJson<ResponseUserToken> login(
             @Valid @RequestBody User user){
         final ResponseUserToken response = authService.login(user.getName(), user.getPassword());

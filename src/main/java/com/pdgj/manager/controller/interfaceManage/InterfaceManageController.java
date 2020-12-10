@@ -5,9 +5,11 @@ import com.pdgj.manager.domain.ResultJson;
 import com.pdgj.manager.domain.interfaceInfo.InterfaceInfoEntity;
 import com.pdgj.manager.service.interfaceManage.InterfaceService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description
  **/
 @RestController
-@Api(description = "接口信息管理")
+@Api(tags = "接口信息管理")
 @RequestMapping("/api/interfaceManage")
 public class InterfaceManageController {
 
@@ -29,7 +31,8 @@ public class InterfaceManageController {
      * @Description 获取所有接口信息
      * @Date 16:00 2020/12/1
      **/
-    @RequestMapping(value = "/queryIntfcPageList", produces = "application/json")
+    @RequestMapping(value = "/queryIntfcPageList", method = RequestMethod.POST, produces = "application/json")
+    @ApiOperation(value = "获取接口分页信息", httpMethod = "POST", response = ResultJson.class, notes = "获取接口分页信息")
     public ResultJson queryIntfcPageList(@RequestBody InterfaceInfoEntity interfaceInfoEntity) {
         PageInfo<InterfaceInfoEntity> pageInfo = interfaceService.queryIntfcPageList(interfaceInfoEntity);
         return ResultJson.ok(pageInfo);
